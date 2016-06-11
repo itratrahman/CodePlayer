@@ -1,0 +1,396 @@
+<!--<The Complete Web Development Course; Lecture 137 - CodePlayer that runs HTML, CSS, & JS code the display the result>-->
+
+
+<!--<doctype of the HTML>-->
+<!doctype html>
+
+<!--<HTML Tag, denoting the begining of the HTML code>-->
+<html>
+
+	<!--<Head Tag of the HTML>-->
+	<head>
+	
+		<!--<Giving the title of the webpage>-->
+		<title>Learning jQuery</title>
+
+		<meta charset="utf-8" />
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />		
+		
+		<!--<Embedding jQuery to the webpage from a local file>-->
+		<script type = "text/javascript" src = "jquery.min.js" ></script>	
+		
+				
+		
+		<!--<Embedding jQuery UI to the webpage from a URL>-->
+		<script type = "text/javascript" src = "http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js" ></script>	
+		
+		<!--<CSS source code>-->
+		<style>	
+		
+			
+		
+			/*Setting the properties of the body*/
+			body {
+			
+				/*Eliminating the effect of default margin and padding*/
+				margin: 0;
+				
+				padding: 0;
+				
+				/*Setting the font*/
+				font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+				
+				/*Setting the font weight*/
+				font-weight: 300;
+			
+			}
+
+			/*Setting the properties of menu bar*/
+			#menuBar {
+			
+				/*Setting the width to whole of the page*/
+				width: 100%;
+				
+				/*Setting the height*/
+				height: 40px;
+				
+				/*Setting the background-color*/
+				background-color: #E0E0E0;
+				
+				/*Setting the bottom border*/
+				border-bottom: 1px solid grey;
+			
+			}	
+			
+			/*Setting the properties of the logo*/
+			#logo{
+			
+				/*Setting the padding*/
+				padding: 5px 0 0 20px;
+				
+				/*Setting the font weight*/
+				font-weight: bold;
+				
+				/*Setting the font size*/
+				font-size: 120%;
+				
+				/*Floating the logo to the left of the webpage*/
+				float: left;
+			}
+			
+			/*Setting the properties of the div containing button*/
+			#buttonDiv {
+			
+				/*Floating the div to the right*/
+				float: right;
+				
+				/*Applying padding to the div*/
+				padding: 5px 10px 0 0;
+			
+			}
+			
+			/*Setting the properties of the run button*/
+			#runButton {
+			
+				/*Setting the font size of the button*/
+				font-size: 120%;			
+			
+			}
+			
+			/*Setting the properties of the toggles*/
+			#toggles {
+			
+				/*Setting the width*/
+				width: 192px;
+							
+				/*Cancelling the default effect of margin*/
+				margin: 0 auto;
+							
+				/*Cancelling the list styles*/
+				list-style: none;
+				
+				/*Setting the border*/
+				border: 1px solid grey;
+				
+				/*Setting the border radius*/
+				border-radius: 3px;							
+				
+				/*Setting the height*/
+				height: 27px;
+				
+				/*Removing the default padding*/
+				padding: 0;		
+
+				/*Moving the relative position down*/
+				position: relative;
+				top: 5px;				
+				
+			}
+			
+			/*Setting the properties of the list items of toggles*/
+			#toggles li {
+			
+				/*float the li elements left*/
+				float: left;
+				
+				/*Setting right borders to seperate the list elements*/
+				border-right: 1px solid grey;
+				
+				/*Setting the padding*/
+				padding: 5px 6px;
+				
+			}
+			
+			/*Break the float of previous element*/
+			.clear {
+			
+				clear: both;
+			
+			}
+			
+			/*Setting the properties of all codeContainers*/
+			.codeContainer {
+			
+								
+				/*Setting the height*/
+				height: 100%;
+				
+				/*Setting the width*/
+				width: 50%;
+				
+				/*Floating every container to the left*/
+				float: left;
+
+				/*Giving a relative positioning to the code container*/
+				position: relative;
+				
+			}
+			
+			/*Setting the properties of all text area encapsulated by code container*/
+			.codeContainer textarea {
+			
+				/*Setting the width & height to cover the encapsulating div*/
+				width: 100%;
+				height: 100%;	
+
+				/*Setting the right border*/
+				border-right: 1px solid grey;
+				
+				/*Setting the font*/
+				font-family: monotype;
+				
+				/*Setting the font size*/
+				font-size: 120%;
+				
+				/*Setting the box sizing attributes so that boxes dont overlap
+				by including the border & padding to text area*/
+				box-sizing: border-box;
+				
+				/*Setting the padding*/
+				padding: 5px;			
+			}
+			
+			/*Setting the properties of codeLabel*/
+			.codeLabel {
+			
+				/*Setting the absolute position*/
+				position: absolute;
+				
+				right: 10px;
+				
+				top: 5px;
+			
+			}	
+
+			#CSSContainer, #JSContainer {
+			
+				display: none;
+			
+			}
+			
+			/*Setting the properties of iframe in the result column*/
+			iframe {
+			
+				/*Setting the height so that it stretches all the way down*/
+				height: 100%;
+				
+				/*Setting the relative position*/
+				position: relative;
+				left: 20px;
+				
+				/*Removing the border*/
+				border: none;
+			
+			}
+			
+			.selected {
+			
+				background-color: grey;
+			
+			}
+			
+		</style>
+							
+	<!--<Closing the Head Tag>-->   		   
+	</head>
+
+	<!--<Body Tag of the HTML>-->
+	<body>
+	
+		<!--<A div for the whole content>-->
+		<div id = "wrapper">
+		
+			<!--<A div for the menu bar>-->
+			<div id = "menuBar">
+			
+				<!--<A div for logo Itrat's CodePlayer>-->
+				<div id = "logo">
+				
+					Itrat's CodePlayer
+				
+				</div>
+				
+				<!--<A div for run button>-->
+				<div id = "buttonDiv">
+					
+					<button id = "runButton">Run</button>
+				
+				</div>
+				
+				<!--<A unordered list for the four toggles>-->
+				<ul id = "toggles">
+				
+					<!--<HTML & Result are given a seperate class to make 
+					make sure they are initially selected>-->
+				
+					<li class = "toggle selected">HTML</li>
+					
+					<li class = "toggle">CSS</li>
+					
+					<li class = "toggle">JS</li>
+					
+					<!--<The right border of the "result" toggle is removed 
+					using inline CSS>-->
+					<li  class = "toggle selected" style = "border:none">Result</li>
+				
+				</ul>
+			
+			
+			</div>	
+			
+			<!--<A div to break the float of previous element>-->
+			<div class = "clear"></div>
+			
+			<!--<A div to contain the column of HTML code>-->
+			<div class = "codeContainer" id = "HTMLContainer">
+			
+				<div class = "codeLabel" >HTML</div>
+			
+				<!--<A textarea to put the example code in>-->
+				<textarea id = "htmlCode">Example Code</textarea>
+			
+			</div>
+			
+			<!--<A div to contain the column of CSS code>-->
+			<div class = "codeContainer" id = "CSSContainer">
+			
+				<div class = "codeLabel" >CSS</div>
+			
+				<!--<A textarea to put the example code in>-->
+				<textarea id = "cssCode">Example Code</textarea>
+			
+			</div>
+			
+			<!--<A div to contain the column of JS code>-->
+			<div class = "codeContainer" id = "JSContainer">
+			
+				<div class = "codeLabel" >JS</div>
+			
+				<!--<A textarea to put the example code in>-->
+				<textarea id = "jsCode">Example Code</textarea>
+			
+			</div>
+			
+			<!--<A div to contain the column of result>-->
+			<div class = "codeContainer" id = "ResultContainer">
+			
+				<div class = "codeLabel" >Result</div>
+			
+				<!--<An iframe to put the reuslt>-->
+				<iframe id = "resultFrame">Example Code</iframe>
+			
+			</div>		
+		
+		</div>
+	
+		
+		<script>
+		
+			////Adjusting the height of the code container		
+			//extracting the height of the window of the browser
+			var windowHeight = $(window).height();			 
+			//extracting the height of the menu bar
+			var menuBarHeight = $("#menuBar").height();			 
+			//calculating the adjusted height of the code container 
+			var codeContainerHeight = windowHeight - menuBarHeight;			
+			//adjusting the height of the code container | px is appended to denote the unit of height
+			$(".codeContainer").height(codeContainerHeight+"px");	
+
+			//the following code executes when a toggle is clicked
+			$(".toggle").click(function(){
+			
+				//toggle the select state of element selected by making it appear grey
+				//toggleClass applies the css given in its argument
+				$(this).toggleClass("selected")	
+
+				//variable to store the name of the clicked Div 
+				var activeDiv = $(this).html();
+				
+				//toggle display appearance the whole selected container
+				$("#"+activeDiv+"Container").toggle();
+				
+				
+				/////Method to retrieve the number of active divs, 
+				/////so that we can calculate the width of codeContainers accordingly
+				
+				//variable to store the number of active divs
+				//method: loop through every element of class "codeContainer"
+				//and filter them according to their display state
+				var showingDivs = $(".codeContainer").filter(function(){
+				
+					//return the containers (this-multiple elements) 
+					//with display status not none (i.e. active divs)
+					return($(this).css("display")!= "none");
+				
+				   //length function to know the number of active divs
+				}).length;
+				
+				//calculate the % width of codeContainers based on number of active divs
+				var width = 100/showingDivs;
+				
+				$(".codeContainer").width(width + "%")
+				
+			});
+			
+			//The following loop of code executes when the run button is clicked
+			//Once the run button is clicked the program runs the HTML, CSS, & JS code			
+			$("#runButton").click(function(){
+			
+				//running the html code typed in the text area designated for HTML & CSS in the html tag of the iframe
+				$("iframe").contents().find("html").html('<style>'+$("#cssCode").val()+'</style>'+$("#htmlCode").val());
+			
+				//Running the JS code typed in the text area in the content window of iframe
+				//The function contentWindow access the content of the iframe
+				//then do eval of the JS code within the content window
+				document.getElementById("resultFrame").contentWindow.eval($('#jsCode').val());				
+			
+			});
+									
+		</script>	
+	
+	<!--<Closing the Body Tag>-->   		
+	</body>
+
+<!--<Closing the HTML Tag, denoting the end of HTML source code>-->   
+</html>
